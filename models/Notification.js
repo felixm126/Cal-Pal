@@ -1,16 +1,15 @@
 const mongoose = require('mongoose')
 const { Schema } = require('mongoose')
 
-const notificationSchema = new Schema(
+const NotificationSchema = new Schema(
 	{
-		user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-		message: { type: String, required: true },
-		read: { type: Boolean, default: false },
-		date: { type: Date, default: Date.now },
+		user_id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+		reminders: { type: String, required: true },
+		achievements: { type: String, required: false },
+		motivationalMessage: { type: String, required: true },
+		date: { type: Date, default: Date.now }, // set default to current date time
 	},
 	{ timestamps: true }
 )
 
-const Notification = mongoose.model('Notification', notificationSchema)
-
-module.exports = Notification
+module.exports = mongoose.model('notification', NotificationSchema)

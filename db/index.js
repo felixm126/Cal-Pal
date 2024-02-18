@@ -2,7 +2,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 
 mongoose
-	.connect(process.env.DATABASE_URL)
+	.connect('mongodb://127.0.0.1:27017/calPalDatabase')
 	.then(() => {
 		console.log('Successfully connected to MongoDB.')
 	})

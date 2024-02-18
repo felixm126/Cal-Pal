@@ -1,17 +1,15 @@
 const mongoose = require('mongoose')
 const { Schema } = require('mongoose')
 
-const healthLogSchema = new Schema(
+const HealthLogSchema = new Schema(
 	{
-		user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+		user_id: { type: Schema.Types.ObjectId, ref: 'User' },
+		date: { type: Date, default: Date.now }, // set default to current data time
 		weight: { type: Number, required: false },
+		bodyMeasurements: { type: String, required: false },
 		caloriesBurned: { type: Number, required: false },
 		waterIntake: { type: Number, required: false }, // in liters or ounces
-		date: { type: Date, default: Date.now },
 	},
 	{ timestamps: true }
 )
-
-const HealthLog = mongoose.model('HealthLog', healthLogSchema)
-
-module.exports = HealthLog
+module.exports = mongoose.model('healthLog', HealthLogSchema)

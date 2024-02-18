@@ -1,23 +1,21 @@
 const mongoose = require('mongoose')
 const { Schema } = require('mongoose')
 
-const userSchema = new Schema(
+const UserSchema = new Schema(
 	{
-		username: { type: String, required: true }, // unique: true <-- to make sure no users can create the same username
-		password: { type: String, required: true }, // unique: true
+		username: { type: String, required: true }, // unique: true ?<-- to make sure no users can create the same username
+		password: { type: String, required: true }, // unique: true ?<-- can we log info?
 		email: { type: String, required: true }, // unique: true
-		birthday: { type: String, required: true },
-		weight: { type: Number },
+		dob: { type: Date, required: true },
+		weight: { type: Number, required: false },
 		activityLevel: {
 			type: String,
 			required: true,
 			enum: ['sedentary', 'moderate', 'extreme'],
 		},
-		goals: { type: String, required: true, enum: ['lose', 'maintain', 'gain'] },
+		goals: { type: String, required: true, enum: ['lose', 'maintain', 'gain'] }, // use enum to require those choices
 	},
 	{ timestamps: true }
 )
 
-const User = mongoose.model('User', userSchema)
-
-module.exports = User
+module.exports = mongoose.model('user', UserSchema)
