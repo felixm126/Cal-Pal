@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 const { Schema } = require('mongoose')
 
 const MealPlanSchema = new Schema(
@@ -18,4 +17,4 @@ const MealPlanSchema = new Schema(
 	{ timestamps: true }
 )
 
-module.exports = mongoose.model('mealPlan', MealPlanSchema)
+module.exports = MealPlanSchema

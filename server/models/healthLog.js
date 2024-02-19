@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 const { Schema } = require('mongoose')
 
 const HealthLogSchema = new Schema(
@@ -12,4 +11,5 @@ const HealthLogSchema = new Schema(
 	},
 	{ timestamps: true }
 )
-module.exports = mongoose.model('healthLog', HealthLogSchema)
+
+module.exports = HealthLogSchema

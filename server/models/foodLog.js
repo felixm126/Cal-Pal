@@ -1,10 +1,9 @@
-const mongoose = require('mongoose')
 const { Schema } = require('mongoose')
 
 const FoodLogSchema = new Schema(
 	{
 		user_id: { type: Schema.Types.ObjectId, ref: 'User' },
-		name: { type: String, required: true },
+		foodItems_id: [{ type: Schema.Types.ObjectId, ref: 'FoodItem' }],
 		calories: { type: Number, required: true },
 		proteins: { type: Number, required: true },
 		fats: { type: Number, required: true },
@@ -19,4 +18,5 @@ const FoodLogSchema = new Schema(
 	},
 	{ timestamps: true }
 )
-module.exports = mongoose.model('foodLog', FoodLogSchema)
+
+module.exports = FoodlogSchema
