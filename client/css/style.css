@@ -1,0 +1,29 @@
+body {
+	font-family: Arial;
+	background-color: blue;
+	display: flex;
+	flex-direction: column;
+}
+
+.nav-bar-container,
+header,
+h1 {
+	text-align: center;
+	justify-content: space-between;
+	color: #333;
+}
+
+.modal-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.modal {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	max-width: 500px;
+	background-color: white;
+	border-radius: 5px;
+}

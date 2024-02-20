@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+		/>
+		<title>Cal Pal</title>
+	</head>
+	<body>
+		<!-- TODO Create Navbar with Modals -->
+		<div class="nav-bar-container">
+			<header>
+				<h1>Cal Pal Tracker</h1>
+			</header>
+		</div>
+
+		<!-- Create Modal Container accessing materialize -->
+		<div class="modal-container">
+			<!-- Trigger Modal Button -->
+			<a
+				class="waves-effect waves-light btn modal-trigger button-open"
+				href="#search-modal"
+				>Search</a
+			>
+		</div>
+
+		<!-- Create Modal for the form -->
+		<div id="search-modal" class="modal">
+			<div class="modal-content">
+				<h3>Add Foods</h3>
+				<form id="foods-info-form">
+					<div class="input-field">
+						<input
+							placeholder="Chicken"
+							id="food-input"
+							type="text"
+							class="validate"
+						/>
+						<label for="food-input">Food</label>
+						<input
+							placeholder="100"
+							id="weight-input"
+							type="number"
+							class="validate"
+						/>
+						<label for="weight-input">Weight</label>
+					</div>
+					<button type="submit" class="waves-effect waves-light btn">
+						Submit
+					</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class="modal-close waves-effect waves-green btn-flat"
+					>Close</a
+				>
+			</div>
+		</div>
+
+		<!-- <section class="container">
+        <div class="search"></div>
+        <div id="nutrition-container"></div>
+    </section> -->
+	</body>
+	<script src="script.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</html>
