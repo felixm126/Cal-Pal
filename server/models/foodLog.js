@@ -4,10 +4,10 @@ const FoodLogSchema = new Schema(
 	{
 		user_id: { type: Schema.Types.ObjectId, ref: 'User' },
 		foodItems_id: [{ type: Schema.Types.ObjectId, ref: 'FoodItem' }],
-		calories: { type: Number, required: true },
-		proteins: { type: Number, required: true },
-		fats: { type: Number, required: true },
-		carbs: { type: Number, required: true },
+		// calories: { type: Number, required: true },
+		// proteins: { type: Number, required: true },
+		// fats: { type: Number, required: true },
+		// carbs: { type: Number, required: true },
 		date: { type: Date, default: Date.now }, // set default to current data time
 		mealType: {
 			type: String,
@@ -19,4 +19,4 @@ const FoodLogSchema = new Schema(
 	{ timestamps: true }
 )
 
-module.exports = FoodlogSchema
+module.exports = FoodLogSchema

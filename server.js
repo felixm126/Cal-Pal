@@ -12,7 +12,7 @@ const {
 	createFoodItem,
 	updateFoodItem,
 	deleteFoodItem,
-} = require('./controllers/foodItemController')
+} = require('./server/controllers/foodItemController')
 
 const {
 	getFoodLogs,
@@ -20,7 +20,7 @@ const {
 	createFoodLog,
 	updateFoodLog,
 	deleteFoodLog,
-} = require('./controllers/foodLogController')
+} = require('./server/controllers/foodLogController')
 
 const {
 	getHealthLogs,
@@ -28,7 +28,7 @@ const {
 	createHealthLog,
 	updateHealthLog,
 	deleteHealthLog,
-} = require('./controllers/healthLogController')
+} = require('./server/controllers/healthLogController')
 
 const {
 	getMealPlans,
@@ -36,7 +36,7 @@ const {
 	createMealPlan,
 	updateMealPlan,
 	deleteMealPlan,
-} = require('./controllers/mealPlanController')
+} = require('./server/controllers/mealPlanController')
 
 const {
 	getNotifications,
@@ -44,7 +44,7 @@ const {
 	createNotification,
 	updateNotification,
 	deleteNotification,
-} = require('./controllers/notificationController')
+} = require('./server/controllers/notificationController')
 
 const app = express()
 const PORT = process.env.PORT || 3001

@@ -3,11 +3,84 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="css/style.css" />
 		<script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+		/>
+		<style>
+			.material-symbols-outlined {
+				font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+			}
+		</style>
 		<title>Cal Pal</title>
 	</head>
-	<body></body>
-	<script src="script.js" defer></script>
+	<body>
+		<!-- Navbar with drop down menu -->
+
+		<nav class="nav-extended teal lighten-1">
+			<div class="nav-wrapper">
+				<!-- Redirect to homepage if user clicks logo -->
+				<a href="index.html" class="blue-text text-darken-4 left brand-logo"
+					>Cal Pal</a
+				>
+				<!--  Need to add badges in dropdown for notifications -->
+				<a href="#" data-target="mobile-demo" class="right sidenav-trigger"
+					><i class="blue-text text-darken-4 material-symbols-outlined"
+						>menu</i
+					></a
+				>
+				<!-- Change colors within html -->
+
+				<!-- Will hide navbar when screen is too small, visible on medium&large screens -->
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<!-- Create html file linking to foodlog and healthlog page -->
+					<li>
+						<a class="blue-text text-darken-4" href="food-log.html">Food Log</a>
+					</li>
+					<li>
+						<a class="blue-text text-darken-4" href="health-log.html"
+							>Health Log</a
+						>
+					</li>
+
+					<li>
+						<!-- Trigger dropdown onclick for desktop -->
+						<a
+							class="blue-text text-darken-4 dropdown-trigger"
+							href="#!"
+							data-target="dropdown-desktop"
+							>Menu<i class="right material-symbols-outlined"
+								>arrow_drop_down</i
+							></a
+						>
+					</li>
+				</ul>
+			</div>
+			<div class="center-align nav-content">
+				<span class="blue-text text-darken-4 nav-title">Dashboard</span>
+			</div>
+		</nav>
+
+		<!-- Show dropdown options within menu -->
+		<ul id="dropdown-desktop" class="dropdown-content">
+			<li><a href="profile-settings.html">Profile & Settings</a></li>
+			<li><a href="notifications.html">Notifications</a></li>
+		</ul>
+
+		<!-- How sidenav will appear on mobile-->
+		<ul class="sidenav" id="mobile-demo">
+			<li><a href="food-log.html">Food Log</a></li>
+			<li><a href="health-log.html">Health Log</a></li>
+			<li><a href="profile-settings.html">Profile & Settings</a></li>
+			<li><a href="notifications.html">Notifications</a></li>
+		</ul>
+	</body>
+	<script src="javascript/script.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>

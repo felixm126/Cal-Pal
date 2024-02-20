@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const FoodItemSchema = require('./foodItem')
-const FoodLogSchema = require('./FoodLog')
+const FoodLogSchema = require('./foodLog')
 const HealthLogSchema = require('./healthLog')
 const MealPlanSchema = require('./mealPlan')
 const NotificationSchema = require('./notification')
