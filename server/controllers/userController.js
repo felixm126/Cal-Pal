@@ -12,7 +12,7 @@ const getUsers = async (req, res) => {
 const getUserById = async (req, res) => {
 	try {
 		const user = await User.findById(req.params.id)
-		if (User) {
+		if (user) {
 			return res.json(user)
 		}
 		return res.status(404).send('User with the specified ID does not exist')

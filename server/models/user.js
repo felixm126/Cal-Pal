@@ -6,7 +6,6 @@ const UserSchema = new Schema(
 		password: { type: String, required: true }, // unique: true ?<-- can we log info?
 		email: { type: String, required: true }, // unique: true
 		dob: { type: Date, required: true },
-		weight: { type: Number, required: false },
 		activityLevel: {
 			type: String,
 			required: true,

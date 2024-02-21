@@ -5,46 +5,11 @@ const db = require('./db')
 const cors = require('cors')
 const logger = require('morgan')
 
-// Controllers
-const {
-	getFoodItems,
-	getFoodItemById,
-	createFoodItem,
-	updateFoodItem,
-	deleteFoodItem,
-} = require('./server/controllers/foodItemController')
-
-const {
-	getFoodLogs,
-	getFoodLogById,
-	createFoodLog,
-	updateFoodLog,
-	deleteFoodLog,
-} = require('./server/controllers/foodLogController')
-
-const {
-	getHealthLogs,
-	getHealthLogById,
-	createHealthLog,
-	updateHealthLog,
-	deleteHealthLog,
-} = require('./server/controllers/healthLogController')
-
-const {
-	getMealPlans,
-	getMealPlanById,
-	createMealPlan,
-	updateMealPlan,
-	deleteMealPlan,
-} = require('./server/controllers/mealPlanController')
-
-const {
-	getNotifications,
-	getNotificationById,
-	createNotification,
-	updateNotification,
-	deleteNotification,
-} = require('./server/controllers/notificationController')
+const foodItems = require('./server/routes/foodItems')
+const foodLogs = require('./server/routes/foodLogs')
+const healthLogs = require('./server/routes/healthLogs')
+const mealPlans = require('./server/routes/mealPlans')
+const notifications = require('./server/routes/notifications')
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -58,35 +23,11 @@ app.get('/', async (req, res) => {
 	res.send('Welcome to Cal Pals Homepage!')
 })
 
-app.get('/api/foodItems', getFoodItems)
-app.get('/api/foodItems/:id', getFoodItemById)
-app.post('/api/foodItems', createFoodItem)
-app.put('/api/foodItems/:id', updateFoodItem)
-app.delete('/api/foodItems/:id', deleteFoodItem)
-
-app.get('/api/foodLogs', getFoodLogs)
-app.get('/api/foodLogs/:id', getFoodLogById)
-app.post('/api/foodLogs', createFoodLog)
-app.put('/api/foodLogs/:id', updateFoodLog)
-app.delete('/api/foodLogs/:id', deleteFoodLog)
-
-app.get('/api/healthLogs', getHealthLogs)
-app.get('/api/healthLogs/:id', getHealthLogById)
-app.post('/api/healthLogs', createHealthLog)
-app.put('/api/healthLogs/:id', updateHealthLog)
-app.delete('/api/healthLogs/:id', deleteHealthLog)
-
-app.get('/api/mealPlans', getMealPlans)
-app.get('/api/mealPlans/:id', getMealPlanById)
-app.post('/api/mealPlans', createMealPlan)
-app.put('/api/mealPlans/:id', updateMealPlan)
-app.delete('/api/mealPlans/:id', deleteMealPlan)
-
-app.get('/api/notifications', getNotifications)
-app.get('/api/notifications/:id', getNotificationById)
-app.post('/api/notifications', createNotification)
-app.put('/api/notifications/:id', updateNotification)
-app.delete('/api/notifications/:id', deleteNotification)
+app.use('/api/foodItems', foodItems)
+app.use('/api/foodLogs', foodLogs)
+app.use('/api/healthLogs', healthLogs)
+app.use('/api/mealPlans', mealPlans)
+app.use('/api/notifications', notifications)
 
 //Global error handling
 app.use((err, req, res, next) => {

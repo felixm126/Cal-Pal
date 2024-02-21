@@ -36,7 +36,7 @@ const updateFoodLog = async (req, res) => {
 		const { id } = req.params
 		const foodLog = await FoodLog.findByIdAndUpdate(id, req.body, { new: true })
 		if (foodLog) {
-			return res.status(200).json(healthLog)
+			return res.status(200).json(foodLog)
 		}
 		throw new Error('Food log not found')
 	} catch (error) {
@@ -47,11 +47,11 @@ const updateFoodLog = async (req, res) => {
 const deleteFoodLog = async (req, res) => {
 	try {
 		const { id } = req.params
-		const deleted = await FoodLog.findByIdAndUpdate(id)
+		const deleted = await FoodLog.findByIdAndDelete(id)
 		if (deleted) {
 			return res.status(200).send('Food log deleted')
 		}
-		throw new Error('Food log deleted')
+		throw new Error('Food log not found')
 	} catch (error) {
 		return res.status(500).send(error.message)
 	}

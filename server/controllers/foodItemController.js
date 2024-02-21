@@ -55,7 +55,7 @@ const deleteFoodItem = async (req, res) => {
 		if (deleted) {
 			return res.status(200).send('Food item deleted')
 		}
-		throw new error('Food item not found')
+		throw new Error('Food item not found')
 	} catch (error) {
 		return res.status(500).send(error.message)
 	}
