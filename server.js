@@ -5,11 +5,12 @@ const db = require('./db')
 const cors = require('cors')
 const logger = require('morgan')
 
-const foodItems = require('./server/routes/foodItems')
-const foodLogs = require('./server/routes/foodLogs')
-const healthLogs = require('./server/routes/healthLogs')
-const mealPlans = require('./server/routes/mealPlans')
-const notifications = require('./server/routes/notifications')
+// server/routes/index.js exported all routes, import here
+// create modular, mountable route handlers, a router instance is a complete middleware and routing system
+const routes = require('./server/routes')
+const {
+	getFoodItemsMacros,
+} = require('./server/controllers/foodItemController')
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -23,11 +24,10 @@ app.get('/', async (req, res) => {
 	res.send('Welcome to Cal Pals Homepage!')
 })
 
-app.use('/api/foodItems', foodItems)
-app.use('/api/foodLogs', foodLogs)
-app.use('/api/healthLogs', healthLogs)
-app.use('/api/mealPlans', mealPlans)
-app.use('/api/notifications', notifications)
+app.get('/foodItem', getFoodItemsMacros)
+
+// Getting all routes from server/routes/index.js to keep files clean
+app.use('/api', routes)
 
 //Global error handling
 app.use((err, req, res, next) => {

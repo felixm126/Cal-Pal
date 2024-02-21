@@ -10,7 +10,7 @@ const MealPlanSchema = new Schema(
 					enum: ['breakfast', 'lunch', 'dinner', 'snack'],
 					required: true,
 				},
-				foodItems_id: [{ type: Schema.Types.ObjectId, ref: 'FoodItem' }],
+				foodItems: [{ type: Schema.Types.ObjectId, ref: 'FoodItem' }],
 			},
 		],
 	},

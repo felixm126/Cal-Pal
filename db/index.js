@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
 require('dotenv').config()
 
+const mongoose = require('mongoose')
 const DATABASE_URI = process.env.DATABASE_URI
 
 async function main() {

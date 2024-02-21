@@ -82,7 +82,23 @@
 			<li><a href="html/profile-settings.html">Profile & Settings</a></li>
 			<li><a href="html/notifications.html">Notifications</a></li>
 		</ul>
+
+		<!-- Post form to server -->
+		<div id="search-modal" class="modal">
+			<div class="modal-content">
+				<h3>Search Food</h3>
+				<form id="food-search-modal">
+					<label for="food-name">Food Name:</label>
+					<input type="text" id="food-name" name="food-name" />
+					<label for="weight">Weight:</label>
+					<input type="number" id="weight" name="weight" />
+					<label for="unit">Unit:</label>
+					<input type="text" id="unit" name="unit" />
+					<input type="submit" value="Submit Form" />
+				</form>
+			</div>
+
 	</body>
-	<script src="javascript/script.js" defer></script>
+	<script type="module" src="script.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>

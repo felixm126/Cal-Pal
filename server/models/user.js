@@ -2,6 +2,7 @@ const { Schema } = require('mongoose')
 
 const UserSchema = new Schema(
 	{
+		//Use bcrypt?
 		username: { type: String, required: true }, // unique: true ?<-- to make sure no users can create the same username
 		password: { type: String, required: true }, // unique: true ?<-- can we log info?
 		email: { type: String, required: true }, // unique: true
