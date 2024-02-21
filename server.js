@@ -24,8 +24,6 @@ app.get('/', async (req, res) => {
 	res.send('Welcome to Cal Pals Homepage!')
 })
 
-app.get('/foodItem', getFoodItemsMacros)
-
 // Getting all routes from server/routes/index.js to keep files clean
 app.use('/api', routes)
 
