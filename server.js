@@ -8,9 +8,6 @@ const logger = require('morgan')
 // server/routes/index.js exported all routes, import here
 // create modular, mountable route handlers, a router instance is a complete middleware and routing system
 const routes = require('./server/routes')
-const {
-	getFoodItemsMacros,
-} = require('./server/controllers/foodItemController')
 
 const app = express()
 const PORT = process.env.PORT || 3001

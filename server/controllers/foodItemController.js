@@ -1,4 +1,5 @@
 const { FoodItem } = require('../models')
+const { fetchNutrients } = require('../api/edamamApi')
 
 const getFoodItems = async (req, res) => {
 	try {
@@ -20,6 +21,23 @@ const getFoodItemById = async (req, res) => {
 			.send('Food item with the specified ID does not exist')
 	} catch (error) {
 		return res.status(500).send(error.message)
+	}
+}
+
+async function getMacronutrients(req, res) {
+	const { name, quantity } = req.body
+
+	// set qualifiers default value to an empty array in case nothing is inputted
+	const qualifiersURI = req.body.qualifiersURI || []
+
+	try {
+		const nutrientData = await fetchNutrients(name, quantity, qualifiersURI)
+		res.json(nutrientData)
+	} catch (error) {
+		res.status(500).json({
+			message: 'Failed to get macronutrient data',
+			error: error.message,
+		})
 	}
 }
 
@@ -64,6 +82,7 @@ const deleteFoodItem = async (req, res) => {
 module.exports = {
 	getFoodItems,
 	getFoodItemById,
+	getMacronutrients,
 	createFoodItem,
 	updateFoodItem,
 	deleteFoodItem,

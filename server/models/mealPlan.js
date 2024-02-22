@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const { Schema } = require('mongoose')
 
 const MealPlanSchema = new Schema(
