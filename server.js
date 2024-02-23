@@ -21,7 +21,7 @@ app.get('/', async (req, res) => {
 	res.send('Welcome to Cal Pals Homepage!')
 })
 
-// Getting all routes from server/routes/index.js to keep files clean
+// Getting all routes from server/routes/index.js to keep files cleaner
 app.use('/api', routes)
 
 //Global error handling

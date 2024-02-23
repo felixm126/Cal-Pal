@@ -4,7 +4,6 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="css/style.css" />
-		<script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
@@ -88,17 +87,37 @@
 			<div class="modal-content">
 				<h3>Search Food</h3>
 				<form id="food-search-modal">
-					<label for="food-name">Food Name:</label>
-					<input type="text" id="food-name" name="food-name" />
-					<label for="weight">Weight:</label>
-					<input type="number" id="weight" name="weight" />
-					<label for="unit">Unit:</label>
-					<input type="text" id="unit" name="unit" />
-					<input type="submit" value="Submit Form" />
+					<!-- Food Name Input -->
+					<div class="input-field">
+						<input
+							type="text"
+							id="food-name"
+							name="food-name"
+							class="validate"
+						/>
+						<label for="food-name">Food Name:</label>
+					</div>
+					<!-- Weight Input -->
+					<div class="input-field">
+						<input type="number" id="weight" name="weight" class="validate" />
+						<label for="weight">Weight:</label>
+					</div>
+					<!-- Unit Input -->
+					<div class="input-field">
+						<select id="unit" name="unit">
+							<option value="" disabled selected>Choose your option</option>
+							<option value="grams">Grams</option>
+							<option value="ounces">Ounces</option>
+							<option value="servings">Servings</option>
+						</select>
+						<label for="unit">Unit:</label>
+					</div>
+					<input type="submit" value="Submit Form" class="btn teal lighten-1" />
 				</form>
 			</div>
-
+		</div>
+		<div id="edamam-info"></div>
 	</body>
-	<script type="module" src="script.js"></script>
+	<script src="script.js" defer></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>

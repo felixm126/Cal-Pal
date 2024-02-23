@@ -1,5 +1,4 @@
 const express = require('express')
-
 const router = express.Router()
 
 const {
@@ -8,14 +7,14 @@ const {
 	createFoodItem,
 	updateFoodItem,
 	deleteFoodItem,
-	getMacronutrients,
+	getFoodItemNutrients,
 } = require('../controllers/foodItemController')
 
 router.get('/', getFoodItems)
 router.get('/:id', getFoodItemById)
 
 router.post('/', createFoodItem)
-router.post('/nutrients', getMacronutrients)
+router.post('/nutrients', getFoodItemNutrients)
 
 router.put('/:id', updateFoodItem)
 router.delete('/:id', deleteFoodItem)

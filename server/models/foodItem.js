@@ -14,7 +14,6 @@ const FoodItemSchema = new Schema(
 			{
 				quantity: { type: Number, required: true }, // Keep user search to numbered quantity
 				measureURI: { type: String, required: true }, // Unit of measurement (eg. grams, ounce, etc)
-				qualifier: [{ type: String, required: false }], // Queries name of food, can be multiple words
 				foodId: { type: String, required: true }, // Edamams specific food ID
 			},
 		],

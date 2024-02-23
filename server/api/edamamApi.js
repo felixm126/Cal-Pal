@@ -4,8 +4,8 @@ const appId = process.env.APPID
 const appKey = process.env.APPKEY
 
 // Fetch data for ingredient Object to then send a post request
-// Params- name,quantity will be user inputs, qualifiers are optional
-async function fetchNutrients(name, quantity, qualifiersURI = []) {
+// Params- name,quantity will be user inputs
+async function fetchNutrients(name, quantity) {
 	const parserUrl = `https://api.edamam.com/api/food-database/v2/parser?app_id=${appId}&app_key=${appKey}&ingr=${encodeURIComponent(
 		name
 	)}&nutrition-type=logging`
@@ -28,9 +28,7 @@ async function fetchNutrients(name, quantity, qualifiersURI = []) {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				// convert obj to strings as is required by edamam
-				ingredients: [
-					{ quantity, measureURI, foodId, qualifiers: qualifiersURI },
-				],
+				ingredients: [{ quantity, measureURI, foodId }],
 			}),
 		})
 		const nutrientsData = await nutrientResponse.json()

@@ -24,14 +24,11 @@ const getFoodItemById = async (req, res) => {
 	}
 }
 
-async function getMacronutrients(req, res) {
+async function getFoodItemNutrients(req, res) {
 	const { name, quantity } = req.body
 
-	// set qualifiers default value to an empty array in case nothing is inputted
-	const qualifiersURI = req.body.qualifiersURI || []
-
 	try {
-		const nutrientData = await fetchNutrients(name, quantity, qualifiersURI)
+		const nutrientData = await fetchNutrients(name, quantity)
 		res.json(nutrientData)
 	} catch (error) {
 		res.status(500).json({
@@ -82,7 +79,7 @@ const deleteFoodItem = async (req, res) => {
 module.exports = {
 	getFoodItems,
 	getFoodItemById,
-	getMacronutrients,
+	getFoodItemNutrients,
 	createFoodItem,
 	updateFoodItem,
 	deleteFoodItem,
