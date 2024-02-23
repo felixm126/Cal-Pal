@@ -20,3 +20,8 @@ body {
 	font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
 	vertical-align: bottom;
 }
+
+.nutrient-info-container {
+	display: flex;
+	font-size: 40px;
+}

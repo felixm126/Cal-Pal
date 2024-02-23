@@ -1,4 +1,5 @@
 require('dotenv').config()
+const fetch = require('node-fetch')
 
 const appId = process.env.APPID
 const appKey = process.env.APPKEY
@@ -9,7 +10,6 @@ async function fetchNutrients(name, quantity) {
 	const parserUrl = `https://api.edamam.com/api/food-database/v2/parser?app_id=${appId}&app_key=${appKey}&ingr=${encodeURIComponent(
 		name
 	)}&nutrition-type=logging`
-
 	try {
 		const parserResponse = await fetch(parserUrl)
 		const parserData = await parserResponse.json()
@@ -34,10 +34,22 @@ async function fetchNutrients(name, quantity) {
 		const nutrientsData = await nutrientResponse.json()
 
 		return {
-			// return obj with these 3 properties to use as needed
 			calories: nutrientsData.calories,
-			totalNutrients: nutrientsData.totalNutrients,
-			totalDaily: nutrientsData.totalDaily,
+			totalNutrients: {
+				protein: {
+					quantity: nutrientsData.totalNutrients.PROCNT.quantity,
+					unit: nutrientsData.totalNutrients.PROCNT.unit,
+				},
+				fat: {
+					quantity: nutrientsData.totalNutrients.FAT.quantity,
+					unit: nutrientsData.totalNutrients.FAT.unit,
+				},
+				carbohydrates: {
+					quantity: nutrientsData.totalNutrients.CHOCDF.quantity,
+					unit: nutrientsData.totalNutrients.CHOCDF.unit,
+				},
+			},
+			servingSize: quantity,
 		}
 	} catch (error) {
 		console.error('Error fetching nutrient data from Edamam:', error)
