@@ -3,7 +3,7 @@ const { Schema } = require('mongoose')
 
 const HealthLogSchema = new Schema(
 	{
-		user_id: { type: Schema.Types.ObjectId, ref: 'User' },
+		user_id: { type: Schema.Types.ObjectId, ref: 'user' },
 		date: { type: Date, default: Date.now }, // set default to current data time
 		weight: { type: Number, required: false },
 		bodyMeasurements: { type: String, required: false },

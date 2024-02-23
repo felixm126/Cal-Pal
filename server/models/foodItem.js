@@ -9,14 +9,6 @@ const FoodItemSchema = new Schema(
 		carbohydrates: { type: Number, required: true },
 		fats: { type: Number, required: true },
 		servingSize: { type: String, required: true },
-		// Edamam post request requirements
-		nutrients: [
-			{
-				quantity: { type: Number, required: true }, // Keep user search to numbered quantity
-				measureURI: { type: String, required: true }, // Unit of measurement (eg. grams, ounce, etc)
-				foodId: { type: String, required: true }, // Edamams specific food ID
-			},
-		],
 	},
 	{ timestamps: true }
 )

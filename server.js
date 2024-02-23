@@ -8,7 +8,6 @@ const logger = require('morgan')
 // server/routes/index.js exported all routes, import here
 // create modular, mountable route handlers, router instance is a complete middleware and routing system
 const routes = require('./server/routes')
-
 const app = express()
 const PORT = process.env.PORT || 3001
 
@@ -17,12 +16,11 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+app.use('/api', routes)
+
 app.get('/', async (req, res) => {
 	res.send('Welcome to Cal Pals Homepage!')
 })
-
-// Getting all routes from server/routes/index.js to keep files cleaner
-app.use('/api', routes)
 
 //Global error handling
 app.use((err, req, res, next) => {

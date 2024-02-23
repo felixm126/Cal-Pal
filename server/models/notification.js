@@ -3,7 +3,7 @@ const { Schema } = require('mongoose')
 
 const NotificationSchema = new Schema(
 	{
-		user_id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+		user_id: { type: Schema.Types.ObjectId, ref: 'User' },
 		reminders: { type: String, required: true },
 		achievements: { type: String, required: false },
 		motivationalMessage: { type: String, required: true },

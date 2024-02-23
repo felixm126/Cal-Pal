@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'
-
 async function foodSearchForm() {
 	const form = document.getElementById('food-search-modal')
 	if (form) {
@@ -28,6 +26,7 @@ async function foodSearchForm() {
 					throw new Error('Network response was not ok')
 				}
 				const data = await response.json()
+				console.log(data)
 				displayNutrients(data)
 			} catch (error) {
 				console.error('Error fetching data:', error)
@@ -72,7 +71,7 @@ function initNavbar() {
 	M.Sidenav.init(sidenavElements)
 
 	// initialize the dropdown
-	const dropdownElements = document.querySelectorAll('.drop-trigger')
+	const dropdownElements = document.querySelectorAll('.dropdown-trigger')
 	M.Dropdown.init(dropdownElements, {
 		constrainWidth: false,
 		coverTrigger: false,
@@ -83,8 +82,8 @@ function initNavbar() {
 }
 
 function selectUnit() {
-	const unitsElements = document.querySelectorAll('select')
-	M.FormSelect.init(unitsElements)
+	const selects = document.querySelectorAll('select')
+	M.FormSelect.init(selects)
 }
 
 document.addEventListener('DOMContentLoaded', function () {

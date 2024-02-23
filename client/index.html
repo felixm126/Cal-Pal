@@ -84,45 +84,68 @@
 		</ul>
 
 		<!-- Post form to server -->
-		<div id="search-modal" class="modal">
-			<div class="modal-content">
-				<h3>Search Food</h3>
-				<form id="food-search-modal">
-					<!-- Food Name Input -->
-					<div class="input-field">
+		<div class="search-container">
+			<a
+				class="waves-effect waves-light button modal-trigger buttonOpen"
+				href="#search"
+				>Add Food</a
+			>
+			<div id="search-modal" class="modal">
+				<div class="modal-content">
+					<h3>Search Food</h3>
+					<form id="food-search-modal">
+						<!-- Food Name Input -->
+						<div class="input-field">
+							<input
+								type="text"
+								id="food-name"
+								name="food-name"
+								class="validate"
+							/>
+							<label for="food-name">Food Name:</label>
+						</div>
+						<!-- Weight Input -->
+						<div class="input-field">
+							<input type="number" id="weight" name="weight" class="validate" />
+							<label for="weight">Weight:</label>
+						</div>
+						<!-- Unit Input -->
+						<div class="input-field">
+							<select id="unit" name="unit">
+								<option value="" disabled selected>Choose your option</option>
+								<option value="grams">Grams</option>
+								<option value="ounces">Ounces</option>
+								<option value="servings">Servings</option>
+							</select>
+							<label for="unit">Unit:</label>
+						</div>
 						<input
-							type="text"
-							id="food-name"
-							name="food-name"
-							class="validate"
+							type="submit"
+							value="Submit Form"
+							class="btn teal lighten-1"
 						/>
-						<label for="food-name">Food Name:</label>
-					</div>
-					<!-- Weight Input -->
-					<div class="input-field">
-						<input type="number" id="weight" name="weight" class="validate" />
-						<label for="weight">Weight:</label>
-					</div>
-					<!-- Unit Input -->
-					<div class="input-field">
-						<select id="unit" name="unit">
-							<option value="" disabled selected>Choose your option</option>
-							<option value="grams">Grams</option>
-							<option value="ounces">Ounces</option>
-							<option value="servings">Servings</option>
-						</select>
-						<label for="unit">Unit:</label>
-					</div>
-					<input type="submit" value="Submit Form" class="btn teal lighten-1" />
-				</form>
+					</form>
+				</div>
 			</div>
+			<a
+				href="#search"
+				class="modal-close waves-effect waves-green button-flat buttonClose"
+				>Close</a
+			>
 		</div>
+
 		<div id="nutrient-info-container">
 			<p id="nutrient-label">Food Name:</p>
-			<p id="nutrient-Calories">Calories:</p>
+			<p id="nutrient-calories">Calories:</p>
+			<p id="nutrient-protein">Protein:</p>
+			<p id="nutrient-fat">Fat:</p>
+			<p id="nutrient-carbohydrates">Carbohydrates:</p>
+			<p id="nutrient-serving-size">Serving Size:</p>
 		</div>
-		<div id="edamam-badge" data-color="white"></div>
+		<footer class="footer">
+			<div id="edamam-badge" data-color="transparent"></div>
+		</footer>
 	</body>
-	<script src="script.js" defer></script>
+	<script src="script.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>
