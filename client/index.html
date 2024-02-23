@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+		/>
+		<style>
+			.material-symbols-outlined {
+				font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+			}
+		</style>
+		<script src="https://developer.edamam.com/attribution/badge.js"></script>
+		<title>Cal Pal</title>
+	</head>
+	<body>
+		<!-- Navbar with drop down menu -->
+
+		<nav class="nav-extended teal lighten-1">
+			<div class="nav-wrapper">
+				<!-- Redirect to homepage if user clicks logo -->
+				<a href="index.html" class="blue-text text-darken-4 left brand-logo"
+					>Cal Pal</a
+				>
+				<!--  Need to add badges in dropdown for notifications -->
+				<a href="#" data-target="mobile-demo" class="right sidenav-trigger"
+					><i class="blue-text text-darken-4 material-symbols-outlined"
+						>menu</i
+					></a
+				>
+				<!-- Change colors within html -->
+
+				<!-- Will hide navbar when screen is too small, visible on medium&large screens -->
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<!-- Create html file linking to foodlog and healthlog page -->
+					<li>
+						<a class="blue-text text-darken-4" href="html/food-log.html"
+							>Food Log</a
+						>
+					</li>
+					<li>
+						<a class="blue-text text-darken-4" href="html/health-log.html"
+							>Health Log</a
+						>
+					</li>
+
+					<li>
+						<!-- Trigger dropdown onclick for desktop -->
+						<a
+							class="blue-text text-darken-4 dropdown-trigger"
+							href="#!"
+							data-target="dropdown-desktop"
+							>Menu<i class="right material-symbols-outlined"
+								>arrow_drop_down</i
+							></a
+						>
+					</li>
+				</ul>
+			</div>
+			<div class="center-align nav-content">
+				<span class="blue-text text-darken-4 nav-title">Dashboard</span>
+			</div>
+		</nav>
+
+		<!-- Show dropdown options within menu -->
+		<ul id="dropdown-desktop" class="dropdown-content">
+			<li><a href="html/profile-settings.html">Profile & Settings</a></li>
+			<li><a href="html/notifications.html">Notifications</a></li>
+		</ul>
+
+		<!-- How sidenav will appear on mobile-->
+		<ul class="sidenav" id="mobile-demo">
+			<li><a href="html/food-log.html">Food Log</a></li>
+			<li><a href="html/health-log.html">Health Log</a></li>
+			<li><a href="html/profile-settings.html">Profile & Settings</a></li>
+			<li><a href="html/notifications.html">Notifications</a></li>
+		</ul>
+
+		<!-- Post form to server -->
+		<div class="search-container">
+			<a
+				class="waves-effect waves-light button modal-trigger buttonOpen"
+				href="#search"
+				>Add Food</a
+			>
+			<div id="search-modal" class="modal">
+				<div class="modal-content">
+					<h3>Search Food</h3>
+					<form id="food-search-modal">
+						<!-- Food Name Input -->
+						<div class="input-field">
+							<input
+								type="text"
+								id="food-name"
+								name="food-name"
+								class="validate"
+							/>
+							<label for="food-name">Food Name:</label>
+						</div>
+						<!-- Weight Input -->
+						<div class="input-field">
+							<input type="number" id="weight" name="weight" class="validate" />
+							<label for="weight">Weight:</label>
+						</div>
+						<!-- Unit Input -->
+						<div class="input-field">
+							<select id="unit" name="unit">
+								<option value="" disabled selected>Choose your option</option>
+								<option value="grams">Grams</option>
+								<option value="ounces">Ounces</option>
+								<option value="servings">Servings</option>
+							</select>
+							<label for="unit">Unit:</label>
+						</div>
+						<input
+							type="submit"
+							value="Submit Form"
+							class="btn teal lighten-1"
+						/>
+					</form>
+				</div>
+			</div>
+			<a
+				href="#search"
+				class="modal-close waves-effect waves-green button-flat buttonClose"
+				>Close</a
+			>
+		</div>
+
+		<div id="nutrient-info-container">
+			<p id="nutrient-label">Food Name:</p>
+			<p id="nutrient-calories">Calories:</p>
+			<p id="nutrient-protein">Protein:</p>
+			<p id="nutrient-fat">Fat:</p>
+			<p id="nutrient-carbohydrates">Carbohydrates:</p>
+			<p id="nutrient-serving-size">Serving Size:</p>
+		</div>
+		<footer class="footer">
+			<div id="edamam-badge" data-color="transparent"></div>
+		</footer>
+	</body>
+	<script src="script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</html>

@@ -1,0 +1,57 @@
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	min-height: 100vh;
+	margin: 0;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+#nutrient-info-container {
+	display: none;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+	max-width: 600px;
+	margin: 20px auto;
+	padding: 10px;
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	color: #333;
+}
+
+#nutrient-info-container p,
+.btn,
+.input-field input[type='text'],
+.input-field input[type='number'],
+.input-field select {
+	max-width: 100%;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+	.nav-content,
+	.sidenav-trigger,
+	.material-symbols-outlined,
+	.btn,
+	.input-field input,
+	.input-field select {
+		font-size: 14px;
+		margin: 5px 0;
+		padding: 8px;
+	}
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
