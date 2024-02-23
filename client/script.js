@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 
 async function foodSearchForm() {
 	const form = document.getElementById('food-search-modal')
@@ -44,7 +44,6 @@ function displayNutrients(data) {
 	const carbohydrates = document.getElementById('nutrient-carbohydrates')
 	const servingSize = document.getElementById('nutrient-serving-size')
 
-	// Update the text content of each element with the data received
 	// Use `parseFloat().toFixed(2)` to format numbers to two decimal places
 	foodName.textContent = `Food Name: ${data.foodName || 'Not found'}`
 

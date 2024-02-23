@@ -1,5 +1,4 @@
 require('dotenv').config()
-const fetch = require('node-fetch')
 
 const appId = process.env.APPID
 const appKey = process.env.APPKEY
