@@ -3,6 +3,7 @@ const router = express.Router()
 
 const {
 	getFoodItems,
+	getEdamamInfo,
 	getFoodItemById,
 	createFoodItem,
 	updateFoodItem,
@@ -10,6 +11,7 @@ const {
 } = require('../controllers/foodItemController')
 
 router.get('/', getFoodItems)
+router.get('/info/:ingredient', getEdamamInfo)
 router.get('/:id', getFoodItemById)
 router.post('/create', createFoodItem)
 router.put('/update/:id', updateFoodItem)

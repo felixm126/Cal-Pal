@@ -1,10 +1,30 @@
 require('dotenv').config()
 const { FoodItem } = require('../models')
+const parseEdamam = require('../services/edamamSearch')
 
 const getFoodItems = async (req, res) => {
 	try {
 		const foodItems = await FoodItem.find()
 		res.json({ foodItems })
+	} catch (error) {
+		return res.status(500).send(error.message)
+	}
+}
+
+const getEdamamInfo = async (req, res) => {
+	console.log('getedamam info')
+	try {
+		const foodName = req.params.ingredient
+		console.log(foodName)
+		// const ingredient = `${weight} ${foodName} ${unit}`
+		const data = await parseEdamam(foodName)
+
+		if (!data) {
+			return res
+				.status(404)
+				.json({ message: 'Food item not found in Edamam database' })
+		}
+		return res.json(data)
 	} catch (error) {
 		return res.status(500).send(error.message)
 	}
@@ -63,6 +83,7 @@ const deleteFoodItem = async (req, res) => {
 
 module.exports = {
 	getFoodItems,
+	getEdamamInfo,
 	getFoodItemById,
 	createFoodItem,
 	updateFoodItem,

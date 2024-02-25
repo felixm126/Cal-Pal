@@ -6,13 +6,20 @@ async function foodSearchForm() {
 			const foodName = document.getElementById('food-name').value
 			const weight = document.getElementById('weight').value
 			const unit = document.getElementById('unit').value
+
+			const queryParameters = new URLSearchParams({
+				foodName,
+				weight,
+				unit,
+			})
+			const url = `http://localhost:3001/api/fooditems/info/${foodName}`
+
 			try {
-				const response = await fetch('/api/fooditems/nutrients', {
-					method: 'POST',
+				const response = await fetch(url, {
+					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
 					},
-					body: JSON.stringify({ foodName, weight, unit }),
 				})
 				if (!response.ok) {
 					throw new Error('Network response was not ok')
@@ -27,7 +34,7 @@ async function foodSearchForm() {
 	}
 }
 
-function displayNutrients(data, unit) {
+function displayNutrients(data) {
 	const foodName = document.getElementById('nutrient-food-name')
 	const calories = document.getElementById('nutrient-calories')
 	const protein = document.getElementById('nutrient-protein')
