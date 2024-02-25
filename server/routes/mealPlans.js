@@ -11,8 +11,8 @@ const {
 
 router.get('/', getMealPlans)
 router.get('/:id', getMealPlanById)
-router.post('/', createMealPlan)
-router.put('/:id', updateMealPlan)
-router.delete('/:id', deleteMealPlan)
+router.post('/create', createMealPlan)
+router.put('/update/:id', updateMealPlan)
+router.delete('/delete/:id', deleteMealPlan)
 
 module.exports = router

@@ -11,8 +11,8 @@ const {
 
 router.get('/', getNotifications)
 router.get('/:id', getNotificationById)
-router.post('/', createNotification)
-router.put('/:id', updateNotification)
-router.delete('/:id', deleteNotification)
+router.post('/create', createNotification)
+router.put('/update/:id', updateNotification)
+router.delete('/delete/:id', deleteNotification)
 
 module.exports = router

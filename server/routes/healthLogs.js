@@ -11,8 +11,8 @@ const {
 
 router.get('/', getHealthLogs)
 router.get('/:id', getHealthLogById)
-router.post('/', createHealthLog)
-router.put('/:id', updateHealthLog)
-router.delete('/:id', deleteHealthLog)
+router.post('/create', createHealthLog)
+router.put('/update/:id', updateHealthLog)
+router.delete('/delete/:id', deleteHealthLog)
 
 module.exports = router

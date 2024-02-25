@@ -2,25 +2,17 @@ async function foodSearchForm() {
 	const form = document.getElementById('food-search-modal')
 	if (form) {
 		form.addEventListener('submit', async function (e) {
-			e.preventDefault() // If form is not properly filled out, will not submit
-
-			// Get values from the form and make a POST req
+			e.preventDefault()
 			const foodName = document.getElementById('food-name').value
 			const weight = document.getElementById('weight').value
 			const unit = document.getElementById('unit').value
-
-			// Adopted example from "https://www.freecodecamp.org/news/make-api-calls-in-javascript/"
 			try {
-				const response = await fetch('/api/foodItems/nutrients', {
+				const response = await fetch('/api/fooditems/nutrients', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
 					},
-					body: JSON.stringify({
-						foodName,
-						weight,
-						unit,
-					}),
+					body: JSON.stringify({ foodName, weight, unit }),
 				})
 				if (!response.ok) {
 					throw new Error('Network response was not ok')
@@ -35,7 +27,7 @@ async function foodSearchForm() {
 	}
 }
 
-function displayNutrients(data) {
+function displayNutrients(data, unit) {
 	const foodName = document.getElementById('nutrient-food-name')
 	const calories = document.getElementById('nutrient-calories')
 	const protein = document.getElementById('nutrient-protein')
@@ -43,7 +35,6 @@ function displayNutrients(data) {
 	const carbohydrates = document.getElementById('nutrient-carbohydrates')
 	const servingSize = document.getElementById('nutrient-serving-size')
 
-	// Use `parseFloat().toFixed(2)` to format numbers to two decimal places
 	foodName.textContent = `Food Name: ${data.foodName || 'Not found'}`
 
 	calories.textContent = `Calories: ${
@@ -66,13 +57,11 @@ function displayNutrients(data) {
 }
 
 function initNavbar() {
-	// initialize sidenav
 	const sidenavElements = document.querySelectorAll('.sidenav')
 	M.Sidenav.init(sidenavElements)
 
-	// initialize the dropdown
-	const dropdownElements = document.querySelectorAll('.dropdown-trigger')
-	M.Dropdown.init(dropdownElements, {
+	const dropdownElement = document.querySelectorAll('.dropdown-trigger')
+	M.Dropdown.init(dropdownElement, {
 		constrainWidth: false,
 		coverTrigger: false,
 		alignment: 'right',
@@ -90,4 +79,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	initNavbar()
 	selectUnit()
 	foodSearchForm()
+
+	const addFoodButton = document.getElementById('add-button')
+	if (addFoodButton) {
+		addFoodButton.onclick = function () {
+			const instance = M.Modal.getInstance(
+				document.getElementById('search-modal')
+			)
+			instance.open()
+		}
+	}
 })

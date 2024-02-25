@@ -4,16 +4,15 @@ const router = express.Router()
 const {
 	getFoodItems,
 	getFoodItemById,
+	createFoodItem,
 	updateFoodItem,
 	deleteFoodItem,
-	createFoodItemNutrients,
 } = require('../controllers/foodItemController')
 
 router.get('/', getFoodItems)
-router.post('/nutrients', createFoodItemNutrients)
 router.get('/:id', getFoodItemById)
-
-router.put('/:id', updateFoodItem)
-router.delete('/:id', deleteFoodItem)
+router.post('/create', createFoodItem)
+router.put('/update/:id', updateFoodItem)
+router.delete('/delete/:id', deleteFoodItem)
 
 module.exports = router

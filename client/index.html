@@ -21,22 +21,16 @@
 		<title>Cal Pal</title>
 	</head>
 	<body>
-		<!-- Navbar with drop down menu -->
-
 		<nav class="nav-extended teal lighten-1">
 			<div class="nav-wrapper">
-				<!-- Redirect to homepage if user clicks logo -->
 				<a href="index.html" class="blue-text text-darken-4 left brand-logo"
 					>Cal Pal</a
 				>
-				<!--  Need to add badges in dropdown for notifications -->
 				<a href="#" data-target="mobile-demo" class="right sidenav-trigger"
 					><i class="blue-text text-darken-4 material-symbols-outlined"
 						>menu</i
 					></a
 				>
-				<!-- Change colors within html -->
-
 				<!-- Will hide navbar when screen is too small, visible on medium&large screens -->
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<!-- Create html file linking to foodlog and healthlog page -->
@@ -50,7 +44,6 @@
 							>Health Log</a
 						>
 					</li>
-
 					<li>
 						<!-- Trigger dropdown onclick for desktop -->
 						<a
@@ -82,12 +75,11 @@
 			<li><a href="html/profile-settings.html">Profile & Settings</a></li>
 			<li><a href="html/notifications.html">Notifications</a></li>
 		</ul>
-
 		<!-- Post form to server -->
 		<div class="search-container">
 			<a
 				class="waves-effect waves-light button modal-trigger buttonOpen"
-				href="#search"
+				href="#search-modal"
 				>Add Food</a
 			>
 			<div id="search-modal" class="modal">
@@ -128,12 +120,11 @@
 				</div>
 			</div>
 			<a
-				href="#search"
+				href="#search-modal"
 				class="modal-close waves-effect waves-green button-flat buttonClose"
 				>Close</a
 			>
 		</div>
-
 		<div id="nutrient-info-container">
 			<p id="nutrient-label">Food Name:</p>
 			<p id="nutrient-calories">Calories:</p>

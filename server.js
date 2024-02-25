@@ -17,12 +17,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/api', routes)
-
 app.get('/', async (req, res) => {
 	res.send('Welcome to Cal Pals Homepage!')
 })
 
 //Global error handling
+
 app.use((err, req, res, next) => {
 	console.error(err.stack)
 	res.status(500).send('Something broke!')
