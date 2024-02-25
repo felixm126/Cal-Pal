@@ -7,9 +7,10 @@ const edamamSearch = async (req, res) => {
 	// set up api get request here to edamam
 	// get Name, weight, unit from user
 	try {
-		const ingredient = req.body
+		const { foodName, weight, unit } = req.query
+		const queryIngredient = `${foodName}${weight}${unit}`
 		const url = `https://api.edamam.com/api/food-database/v2/parser?app_id=${appId}&app_key=${appKey}&ingr=${encodeURIComponent(
-			ingredient
+			queryIngredient
 		)}&nutrition-type=logging`
 
 		let response = await fetch(url)
@@ -20,6 +21,7 @@ const edamamSearch = async (req, res) => {
 				.status(404)
 				.json({ message: 'Food item not found in Edamam database' })
 		}
+		console.log(data)
 		return res.json(data)
 
 		// const foodId = data.hints.food.foodId
