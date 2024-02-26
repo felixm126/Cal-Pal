@@ -33,8 +33,33 @@ async function foodSearchForm() {
 			} catch (error) {
 				console.error('Error fetching data:', error)
 			}
+			// after user clicks submit, form will close
+			const instance = M.Modal.getInstance(
+				document.getElementById('search-modal')
+			)
+			instance.close()
+			const nutrientInfoContainer = document.getElementById(
+				'nutrient-info-container'
+			)
+			nutrientInfoContainer.style.display = 'block'
+			const addFoodContainer = document.getElementById('add-food-container')
+			addFoodContainer.style.display = 'block'
 		})
 	}
+}
+
+async function addToFoodLog(data) {
+	const response = await fetch('http://localhost:3001/api/foodlogs/create', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	})
+	if (!response.ok) {
+		throw new Error('Failed to add food log entry')
+	}
+	const result = await response.json()
 }
 
 // function to display nutrient values to UI - takes into account users inputted unit and weight
@@ -72,7 +97,7 @@ function displayNutrients(data, inputWeight, inputUnit) {
 	if (data.parsed && data.parsed.length > 0) {
 		const parsedSearch = data.parsed[0]
 
-		measurementsWithName.innerHTML = `Food: ${inputWeight} ${inputUnit}s of${
+		measurementsWithName.innerHTML = `Food: ${inputWeight} ${inputUnit}s of ${
 			parsedSearch.food.label || 'Not available'
 		}`
 		// measurement.innerHTML = `Measurement: ${inputWeight} ${inputUnit}s`
@@ -118,13 +143,22 @@ document.addEventListener('DOMContentLoaded', function () {
 	selectUnit()
 	foodSearchForm()
 
-	const addFoodButton = document.getElementById('add-button')
-	if (addFoodButton) {
-		addFoodButton.onclick = function () {
-			const instance = M.Modal.getInstance(
-				document.getElementById('search-modal')
-			)
-			instance.open()
-		}
+	const searchButton = document.getElementById('search-button')
+	if (searchButton) {
+		searchButton.addEventListener =
+			('click',
+			function () {
+				const instance = M.Modal.getInstance(
+					document.getElementById('search-modal')
+				)
+				instance.open()
+			})
+	}
+	const addFoodbutton = document.getElementById('add-food-btn')
+	if (addfoodButton) {
+		addFoodbutton.addEventListener('click', function () {
+			// direct user to food log page
+			window.location.href = 'html/food-log.html'
+		})
 	}
 })

@@ -78,7 +78,7 @@
 		<!-- Post form to server -->
 		<div class="search-container">
 			<a
-				class="waves-effect waves-light button modal-trigger buttonOpen"
+				class="waves-effect waves-light btn modal-trigger btnOpen"
 				href="#search-modal"
 				>Search Food</a
 			>
@@ -109,7 +109,7 @@
 								</option>
 								<option value="gram">Grams</option>
 								<option value="ounce">Ounces</option>
-								<option value="serving">Servings</option>
+								<!-- <option value="serving">Servings</option> -->
 							</select>
 							<label for="unit">Unit:</label>
 						</div>
@@ -123,11 +123,10 @@
 			</div>
 			<a
 				href="#search-modal"
-				class="modal-close waves-effect waves-green button-flat buttonClose"
-				>Close</a
-			>
+				class="modal-close waves-effect waves-green btn-flat btnClose"
+			></a>
 		</div>
-		<div id="nutrient-info-container">
+		<div id="nutrient-info-container" style="display: none">
 			<p id="nutrient-measurement-name">Food:</p>
 			<!-- <p id="nutrient-measurement">Measurement:</p> -->
 			<!-- <p id="nutrient-weight">Weight:</p>
@@ -136,6 +135,14 @@
 			<p id="nutrient-protein">Protein:</p>
 			<p id="nutrient-fat">Fat:</p>
 			<p id="nutrient-carbohydrates">Carbohydrates:</p>
+		</div>
+		<div id="add-food-container" style="display: none">
+			<button
+				id="add-food-btn"
+				class="btn waves-effect waves-light blue lighten-1"
+			>
+				Add Food
+			</button>
 		</div>
 		<footer class="footer">
 			<div id="edamam-badge" data-color="transparent"></div>
