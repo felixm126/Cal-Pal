@@ -12,12 +12,12 @@ const getFoodItems = async (req, res) => {
 }
 
 const getEdamamInfo = async (req, res) => {
-	console.log('getedamam info')
+	console.log('get edamam info')
 	try {
-		const foodName = req.params.ingredient
-		console.log(foodName)
+		const params = req.params.ingredient
+		console.log(params)
 		// const ingredient = `${weight} ${foodName} ${unit}`
-		const data = await parseEdamam(foodName)
+		const data = await parseEdamam(params)
 
 		if (!data) {
 			return res

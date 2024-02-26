@@ -80,7 +80,7 @@
 			<a
 				class="waves-effect waves-light button modal-trigger buttonOpen"
 				href="#search-modal"
-				>Add Food</a
+				>Search Food</a
 			>
 			<div id="search-modal" class="modal">
 				<div class="modal-content">
@@ -104,10 +104,12 @@
 						<!-- Unit Input -->
 						<div class="input-field">
 							<select id="unit" name="unit">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="grams">gram</option>
-								<option value="ounces">ounce</option>
-								<option value="servings">serving</option>
+								<option value="" disabled selected>
+									Choose your measurement
+								</option>
+								<option value="gram">Grams</option>
+								<option value="ounce">Ounces</option>
+								<option value="serving">Servings</option>
 							</select>
 							<label for="unit">Unit:</label>
 						</div>
@@ -126,17 +128,18 @@
 			>
 		</div>
 		<div id="nutrient-info-container">
-			<p id="nutrient-label">Food Name:</p>
+			<p id="nutrient-food-name">Food:</p>
+			<p id="nutrient-weight">Weight:</p>
+			<p id="nutrient-unit">Unit:</p>
 			<p id="nutrient-calories">Calories:</p>
 			<p id="nutrient-protein">Protein:</p>
 			<p id="nutrient-fat">Fat:</p>
 			<p id="nutrient-carbohydrates">Carbohydrates:</p>
-			<p id="nutrient-serving-size">Serving Size:</p>
 		</div>
 		<footer class="footer">
 			<div id="edamam-badge" data-color="transparent"></div>
 		</footer>
 	</body>
-	<script src="script.js"></script>
+	<script src="script.js" defer></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>

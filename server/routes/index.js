@@ -8,11 +8,6 @@ const mealPlans = require('./mealPlans')
 const notifications = require('./notifications')
 const users = require('./users')
 
-// router.get()
-
-// router.use('/', (req, res) => {
-// 	res.send('Connected to API')
-// })
 router.use('/fooditems', foodItems)
 router.use('/foodlogs', foodLogs)
 router.use('/healthlogs', healthLogs)
