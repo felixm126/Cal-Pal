@@ -16,7 +16,6 @@ async function foodSearchForm() {
 			const url = `http://localhost:3001/api/fooditems/info/${encodedIngredient}`
 
 			// fetch method adapted from https://www.freecodecamp.org/news/make-api-calls-in-javascript/
-
 			try {
 				const response = await fetch(url, {
 					method: 'GET',
@@ -49,18 +48,68 @@ async function foodSearchForm() {
 }
 
 async function addToFoodLog(data) {
-	const response = await fetch('http://localhost:3001/api/foodlogs/create', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	})
-	if (!response.ok) {
-		throw new Error('Failed to add food log entry')
+	try {
+		const response = await fetch('http://localhost:3001/api/foodlogs/create', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+		if (!response.ok) {
+			throw new Error('Failed to add food log entry')
+		}
+		return await response.json()
+	} catch (error) {
+		console.error('Error:', error)
 	}
-	const result = await response.json()
 }
+
+// async function updateFoodLogEntry(foodLogId, updatedData) {
+// 	try {
+// 		const response = await fetch(
+// 			`http://localhost:3001/api/foodlogs/update/${foodLogId}`,
+// 			{
+// 				method: 'PUT',
+// 				headers: {
+// 					'Content-Type': 'application/json',
+// 				},
+// 				body: JSON.stringify(updatedData),
+// 			}
+// 		)
+
+// 		if (!response.ok) {
+// 			throw new Error('Network response was not ok')
+// 		}
+// 		const updatedFoodLog = await response.json()
+// 		console.log('Updated food log:', updatedFoodLog)
+// 		// Handle the updated food log as needed
+// 	} catch (error) {
+// 		console.error('Error updating food log:', error)
+// 	}
+// }
+// updateFoodLogEntry(foodLogId, updatedData)
+
+// async function deleteFoodLogEntry(foodLogId) {
+// 	try {
+// 		const url = `http://localhost:3001/api/foodlogs/delete/${foodLogId}`
+// 		// delete request to server
+// 		const response = await fetch(url, {
+// 			method: 'DELETE',
+// 			headers: {
+// 				'Content-Type': 'application/json',
+// 			},
+// 		})
+// 		if (!response.ok) {
+// 			throw new Error('Network response was not ok')
+// 		}
+// 		const result = await response.json()
+// 		console.log('Food log entry deleted:', result)
+// 	} catch (error) {
+// 		console.error('Error deleting food log entry:', error)
+// 	}
+// }
+// deleteFoodLogEntry(foodLogId)
 
 // function to display nutrient values to UI - takes into account users inputted unit and weight
 function displayNutrients(data, inputWeight, inputUnit) {
@@ -138,27 +187,34 @@ function selectUnit() {
 	M.FormSelect.init(selects)
 }
 
+function closeModal() {
+	const instance = M.Modal.getInstance(document.getElementById('search-modal'))
+	instance.close()
+	document.getElementById('nutrient-info-container').style.display = 'block'
+	document.getElementbyId('add-food-container').style.display = 'block'
+}
+
+function searchButton() {
+	const searchButton = document.getElementById('search-button')
+	if (searchButton) {
+		searchButton.addEventListener('click', function () {
+			const instance = M.Modal.getInstance(
+				document.getElementById('search-modal')
+			)
+			instance.open()
+		})
+	}
+}
+
+function addFoodButton() {
+	if (addFoodButton) {
+		addFoodButton.addEventListener('click', function () {
+			window.location.href = 'html/food-log.html'
+		})
+	}
+}
 document.addEventListener('DOMContentLoaded', function () {
 	initNavbar()
 	selectUnit()
 	foodSearchForm()
-
-	const searchButton = document.getElementById('search-button')
-	if (searchButton) {
-		searchButton.addEventListener =
-			('click',
-			function () {
-				const instance = M.Modal.getInstance(
-					document.getElementById('search-modal')
-				)
-				instance.open()
-			})
-	}
-	const addFoodbutton = document.getElementById('add-food-btn')
-	if (addfoodButton) {
-		addFoodbutton.addEventListener('click', function () {
-			// direct user to food log page
-			window.location.href = 'html/food-log.html'
-		})
-	}
 })
