@@ -23,9 +23,7 @@
 	<body>
 		<nav class="nav-extended teal lighten-1">
 			<div class="nav-wrapper">
-				<a href="index.html" class="blue-text text-darken-4 left brand-logo"
-					>Cal Pal</a
-				>
+				<a class="blue-text text-darken-4 left brand-logo">Cal Pal</a>
 				<a href="#" data-target="mobile-demo" class="right sidenav-trigger"
 					><i class="blue-text text-darken-4 material-symbols-outlined"
 						>menu</i
@@ -33,17 +31,6 @@
 				>
 				<!-- Will hide navbar when screen is too small, visible on medium&large screens -->
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<!-- Create html file linking to foodlog and healthlog page -->
-					<li>
-						<a class="blue-text text-darken-4" href="html/food-log.html"
-							>Food Log</a
-						>
-					</li>
-					<li>
-						<a class="blue-text text-darken-4" href="html/health-log.html"
-							>Health Log</a
-						>
-					</li>
 					<li>
 						<!-- Trigger dropdown onclick for desktop -->
 						<a
@@ -64,16 +51,31 @@
 
 		<!-- Show dropdown options within menu -->
 		<ul id="dropdown-desktop" class="dropdown-content">
-			<li><a href="html/profile-settings.html">Profile & Settings</a></li>
-			<li><a href="html/notifications.html">Notifications</a></li>
+			<li>
+				<a href="html/profile-settings.html" id="profile-settings"
+					>Profile & Settings</a
+				>
+			</li>
+			<li><a href="html/food-log.html" id="food-log">Food Log</a></li>
+			<li>
+				<a
+					href="home"
+					id="home"
+					onclick="window.location.reload(); return false;"
+					>Home</a
+				>
+			</li>
 		</ul>
 
 		<!-- How sidenav will appear on mobile-->
 		<ul class="sidenav" id="mobile-demo">
 			<li><a href="html/food-log.html">Food Log</a></li>
-			<li><a href="html/health-log.html">Health Log</a></li>
 			<li><a href="html/profile-settings.html">Profile & Settings</a></li>
-			<li><a href="html/notifications.html">Notifications</a></li>
+			<li>
+				<a href="home" onclick="window.location.reload(); return false;"
+					>Home</a
+				>
+			</li>
 		</ul>
 		<!-- Post form to server -->
 		<div class="search-container">
@@ -109,7 +111,6 @@
 								</option>
 								<option value="gram">Grams</option>
 								<option value="ounce">Ounces</option>
-								<!-- <option value="serving">Servings</option> -->
 							</select>
 							<label for="unit">Unit:</label>
 						</div>
@@ -126,11 +127,9 @@
 				class="modal-close waves-effect waves-green btn-flat btnClose"
 			></a>
 		</div>
+		<!-- Initially hide nutrient info then dynamically show when clicked -->
 		<div id="nutrient-info-container" style="display: none">
 			<p id="nutrient-measurement-name">Food:</p>
-			<!-- <p id="nutrient-measurement">Measurement:</p> -->
-			<!-- <p id="nutrient-weight">Weight:</p>
-			<p id="nutrient-unit">Unit:</p> -->
 			<p id="nutrient-calories">Calories:</p>
 			<p id="nutrient-protein">Protein:</p>
 			<p id="nutrient-fat">Fat:</p>
