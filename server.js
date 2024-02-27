@@ -31,7 +31,7 @@ app.get('/api/foodlogs/logs', foodLogController.getFoodLogsByName)
 app.get('/api/foodlogs/:id', foodLogController.getFoodLogById)
 app.post('/api/foodlogs/create', foodLogController.createFoodLog)
 app.put('/api/foodlogs/update/:id', foodLogController.updateFoodLog)
-app.delete('/delete/:id', foodLogController.deleteFoodLog)
+app.delete('/api/foodlogs/delete/:id', foodLogController.deleteFoodLog)
 
 // users
 app.get('/api/users/:id', userController.getUserById)
