@@ -17,7 +17,6 @@ async function updateFoodLogEntry(foodLogId, updatedData) {
 
 		const updatedFoodLog = await response.json()
 		console.log('Updated food log:', updatedFoodLog)
-		// Handle the updated food log as needed
 	} catch (error) {
 		console.error('Error updating food log:', error)
 	}

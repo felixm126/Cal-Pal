@@ -10,6 +10,7 @@ const FoodLogSchema = new Schema(
 		protein: { type: Number, required: true },
 		fat: { type: Number, required: true },
 		carbohydrates: { type: Number, required: true },
+		edamamFoodId: { type: String, required: true },
 		notes: { type: String, required: false },
 	},
 	{ timestamps: true }

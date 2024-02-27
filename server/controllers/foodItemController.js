@@ -2,21 +2,11 @@ require('dotenv').config()
 const { FoodItem } = require('../models')
 const parseEdamam = require('../services/edamamSearch')
 
-const getFoodItems = async (req, res) => {
-	try {
-		const foodItems = await FoodItem.find()
-		res.json({ foodItems })
-	} catch (error) {
-		return res.status(500).send(error.message)
-	}
-}
-
 const getEdamamInfo = async (req, res) => {
 	console.log('get edamam info')
 	try {
 		const params = req.params.ingredient
 		console.log(params)
-		// const ingredient = `${weight} ${foodName} ${unit}`
 		const data = await parseEdamam(params)
 
 		if (!data) {
@@ -53,39 +43,8 @@ const createFoodItem = async (req, res) => {
 	}
 }
 
-const updateFoodItem = async (req, res) => {
-	try {
-		let { id } = req.params
-		let foodItem = await FoodItem.findByIdAndUpdate(id, req.body, {
-			new: true,
-		})
-		if (foodItem) {
-			return res.status(200).json(foodItem)
-		}
-		throw new Error('Food item not found')
-	} catch (error) {
-		return res.status(500).send(error.message)
-	}
-}
-
-const deleteFoodItem = async (req, res) => {
-	try {
-		const { id } = req.params
-		const deleted = await FoodItem.findByIdAndDelete(id)
-		if (deleted) {
-			return res.status(200).send('Food item deleted')
-		}
-		throw new Error('Food item not found')
-	} catch (error) {
-		return res.status(500).send(error.message)
-	}
-}
-
 module.exports = {
-	getFoodItems,
 	getEdamamInfo,
 	getFoodItemById,
 	createFoodItem,
-	updateFoodItem,
-	deleteFoodItem,
 }

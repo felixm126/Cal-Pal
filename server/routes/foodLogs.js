@@ -2,14 +2,14 @@ const express = require('express')
 const router = express.Router()
 
 const {
-	getFoodLogs,
+	getFoodLogsByName,
 	getFoodLogById,
 	createFoodLog,
 	updateFoodLog,
 	deleteFoodLog,
 } = require('../controllers/foodLogController')
 
-router.get('/', getFoodLogs)
+router.get('/logs', getFoodLogsByName)
 router.get('/:id', getFoodLogById)
 router.post('/create', createFoodLog)
 router.put('/update/:id', updateFoodLog)

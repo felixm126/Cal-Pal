@@ -108,6 +108,8 @@ function displayNutrients(data, inputWeight, inputUnit) {
 	}
 
 	if (data.hints && data.hints.length > 0) {
+		const edamamFoodId = data.hints[0].food.foodId
+		logInformation.edamamFoodId = edamamFoodId
 		const nutrients = data.hints[0].food.nutrients
 
 		//No more than 2 decimals will be shown with toFixed()
