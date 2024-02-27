@@ -1,8 +1,11 @@
 const { FoodLog } = require('../models')
 
-const getFoodLogs = async (req, res) => {
+const getFoodLogsByName = async (req, res) => {
+	console.log('here')
 	try {
-		const foodLogs = await FoodLog.find()
+		const foodName = req.query.foodName
+
+		const foodLogs = await FoodLog.find({})
 		res.json(foodLogs)
 	} catch (error) {
 		return res.status(500).send(error.message)
@@ -33,12 +36,11 @@ const createFoodLog = async (req, res) => {
 
 const updateFoodLog = async (req, res) => {
 	try {
-		const { id } = req.params
-		const foodLog = await FoodLog.findByIdAndUpdate(id, req.body, { new: true })
-		if (foodLog) {
-			return res.status(200).json(foodLog)
+		const FoodLog = await FoodLog.findByIdAndUpdate(req.params.id, {})
+		if (FoodLog) {
+			return res.status(200).json({ FoodLog })
 		}
-		throw new Error('Food log not found')
+		throw new Error('Food log with the specified ID not found')
 	} catch (error) {
 		return res.status(500).send(error.message)
 	}
@@ -46,19 +48,18 @@ const updateFoodLog = async (req, res) => {
 
 const deleteFoodLog = async (req, res) => {
 	try {
-		const { id } = req.params
-		const deleted = await FoodLog.findByIdAndDelete(id)
-		if (deleted) {
+		const foodLog = await FoodLog.findByIdAndDelete(req.params.id)
+		if (foodLog) {
 			return res.status(200).send('Food log deleted')
 		}
-		throw new Error('Food log not found')
+		throw new Error('Food log with the specified ID not found')
 	} catch (error) {
 		return res.status(500).send(error.message)
 	}
 }
 
 module.exports = {
-	getFoodLogs,
+	getFoodLogsByName,
 	getFoodLogById,
 	createFoodLog,
 	updateFoodLog,

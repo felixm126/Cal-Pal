@@ -1,93 +1,229 @@
+let logInformation = {}
+
 async function foodSearchForm() {
 	const form = document.getElementById('food-search-modal')
 	if (form) {
 		form.addEventListener('submit', async function (e) {
-			e.preventDefault() // If form is not properly filled out, will not submit
-
-			// Get values from the form and make a POST req
+			// form cannot be submitted unless correct
+			e.preventDefault()
+			// get user input values
 			const foodName = document.getElementById('food-name').value
 			const weight = document.getElementById('weight').value
 			const unit = document.getElementById('unit').value
 
-			// Adopted example from "https://www.freecodecamp.org/news/make-api-calls-in-javascript/"
+			// combine inputs into ingredient query then encode
+			const ingredient = `${weight} ${foodName} ${unit}`
+			// takes into account spaces and will be url safe
+			const encodedIngredient = encodeURIComponent(ingredient)
+
+			const url = `http://localhost:3001/api/fooditems/info/${encodedIngredient}`
+
+			// fetch method adapted from https://www.freecodecamp.org/news/make-api-calls-in-javascript/
 			try {
-				const response = await fetch('/api/foodItems/nutrients', {
-					method: 'POST',
+				const response = await fetch(url, {
+					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
 					},
-					body: JSON.stringify({
-						foodName,
-						weight,
-						unit,
-					}),
 				})
 				if (!response.ok) {
 					throw new Error('Network response was not ok')
 				}
 				const data = await response.json()
 				console.log(data)
-				displayNutrients(data)
+
+				// supply function with 3 parameters
+				displayNutrients(data, weight, unit)
 			} catch (error) {
 				console.error('Error fetching data:', error)
 			}
+			// after user clicks submit, form will close
+			const instance = M.Modal.getInstance(
+				document.getElementById('search-modal')
+			)
+			instance.close()
+			const nutrientInfoContainer = document.getElementById(
+				'nutrient-info-container'
+			)
+			nutrientInfoContainer.style.display = 'block'
+			const addFoodContainer = document.getElementById('add-food-container')
+			addFoodContainer.style.display = 'block'
 		})
 	}
 }
 
-function displayNutrients(data) {
-	const foodName = document.getElementById('nutrient-food-name')
+async function addToFoodLog(data) {
+	try {
+		const response = await fetch('http://localhost:3001/api/foodlogs/create', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+		if (!response.ok) {
+			throw new Error('Failed to add food log entry')
+		}
+		const foodLogData = await response.json()
+		return foodLogData
+	} catch (error) {
+		console.error('Error:', error)
+	}
+}
+
+// function to display nutrient values to UI - takes into account users inputted unit and weight
+function displayNutrients(data, inputWeight, inputUnit) {
+	const measurementsWithName = document.getElementById(
+		'nutrient-measurement-name'
+	)
+
 	const calories = document.getElementById('nutrient-calories')
 	const protein = document.getElementById('nutrient-protein')
 	const fat = document.getElementById('nutrient-fat')
 	const carbohydrates = document.getElementById('nutrient-carbohydrates')
-	const servingSize = document.getElementById('nutrient-serving-size')
 
-	// Use `parseFloat().toFixed(2)` to format numbers to two decimal places
-	foodName.textContent = `Food Name: ${data.foodName || 'Not found'}`
+	//API request will return per 100grams, set multiplier accordingly
+	const gramsPerUnit = {
+		Gram: 1,
+		Ounce: 28.3495,
+	}
+	const weightInGrams = inputWeight * (gramsPerUnit[inputUnit] || 1)
+	const multiplier = weightInGrams / 10
 
-	calories.textContent = `Calories: ${
-		parseFloat(data.calories).toFixed(2) || 'Not found'
-	}`
+	// Reset displayed values if multiple searches
+	measurementsWithName.innerHTML = 'Food: '
+	calories.innerHTML = 'Calories: '
+	protein.innerHTML = 'Protein: '
+	fat.innerHTML = 'Fat: '
+	carbohydrates.innerHTML = 'Carbohydrates: '
 
-	protein.textContent = `Protein: ${parseFloat(data.protein.quantity).toFixed(
-		2
-	)} ${data.protein.unit || ''}`
+	// Check to make sure data is available before showing data
+	if (data.parsed && data.parsed.length > 0) {
+		const parsedSearch = data.parsed[0]
 
-	fat.textContent = `Fat: ${parseFloat(data.fat.quantity).toFixed(2)} ${
-		data.fat.unit || ''
-	}`
+		measurementsWithName.innerHTML = `Food: ${inputWeight} ${inputUnit}s of ${
+			parsedSearch.food.label || 'Not available'
+		}`
+		logInformation.foodName = `${inputWeight} ${inputUnit} ${parsedSearch.food.label}`
+	}
 
-	carbohydrates.textContent = `Carbohydrates: ${parseFloat(
-		data.carbohydrates.quantity
-	).toFixed(2)}${data.carbohydrates.unit || 'Not found'}`
+	if (data.hints && data.hints.length > 0) {
+		const edamamFoodId = data.hints[0].food.foodId
+		logInformation.edamamFoodId = edamamFoodId
+		const nutrients = data.hints[0].food.nutrients
 
-	servingSize.textContent = `Serving Size: ${data.servingSize || 'Not found'}`
+		//No more than 2 decimals will be shown with toFixed()
+		calories.innerHTML += `${(nutrients.ENERC_KCAL * multiplier).toFixed(
+			2
+		)} kcal`
+		logInformation.calories = parseFloat(
+			(nutrients.ENERC_KCAL * multiplier).toFixed(2)
+		)
+
+		protein.innerHTML += `${(nutrients.PROCNT * multiplier).toFixed(2)} grams`
+		logInformation.protein = parseFloat(
+			(nutrients.PROCNT * multiplier).toFixed(2)
+		)
+		fat.innerHTML += `${(nutrients.FAT * multiplier).toFixed(2)} grams`
+		logInformation.fat = parseFloat((nutrients.FAT * multiplier).toFixed(2))
+		carbohydrates.innerHTML += `${(nutrients.CHOCDF * multiplier).toFixed(
+			2
+		)} grams`
+		logInformation.carbohydrates = parseFloat(
+			(nutrients.CHOCDF * multiplier).toFixed(2)
+		)
+		console.log(logInformation)
+	}
 }
 
-function initNavbar() {
-	// initialize sidenav
+function initAllModals() {
+	// Initialize sidenav
 	const sidenavElements = document.querySelectorAll('.sidenav')
 	M.Sidenav.init(sidenavElements)
 
-	// initialize the dropdown
+	// Initialize Dropdown
 	const dropdownElements = document.querySelectorAll('.dropdown-trigger')
 	M.Dropdown.init(dropdownElements, {
 		constrainWidth: false,
 		coverTrigger: false,
 		alignment: 'right',
 	})
+
+	// Initialize modal
 	const modalElements = document.querySelectorAll('.modal')
 	M.Modal.init(modalElements)
-}
 
-function selectUnit() {
+	// initialize selects form
 	const selects = document.querySelectorAll('select')
 	M.FormSelect.init(selects)
+
+	// close modal
+	const searchModalElement = document.getElementById('search-modal')
+	if (searchModalElement) {
+		const closeModalButton = searchModalElement.querySelector('.close-modal')
+		if (closeModalButton) {
+			closeModalButton.addEventListener('click', function () {
+				const instance = M.Modal.getInstance(searchModalElement)
+				instance.close()
+				document.getElementById('nutrient-info-container').style.display =
+					'block'
+				document.getElementById('add-food-container').style.display = 'block'
+			})
+		}
+	}
+}
+
+// combine event listeners to one function
+function setupEventListeners() {
+	// Search Modal
+	const searchButton = document.getElementById('search-button')
+	const searchModal = M.Modal.getInstance(
+		document.getElementById('search-modal')
+	)
+	if (searchButton) {
+		searchButton.addEventListener('click', function () {
+			searchModal.open()
+		})
+	}
+
+	// Add Food Button
+	const addFoodButton = document.getElementById('add-food-btn')
+	if (addFoodButton) {
+		addFoodButton.addEventListener('click', function () {
+			// add food info to db
+			addToFoodLog(logInformation)
+
+			document.getElementById('nutrient-info-container').style.display = 'block'
+			document.getElementById('add-food-container').style.display = 'block'
+			searchModal.close()
+		})
+	}
+
+	// Navigation Buttons
+	const homeButton = document.getElementById('home')
+	const foodLogButton = document.getElementById('food-log')
+	const profileButton = document.getElementById('profile-settings')
+
+	if (homeButton) {
+		homeButton.addEventListener('click', function () {
+			// refresh home page if clicked when in home already
+			window.location.reload()
+		})
+	} else if (foodLogButton) {
+		// switch to food-log page
+		foodLogButton.addEventListener('click', function () {
+			window.location.href = 'html/food-log.html'
+		})
+	} else if (profileButton) {
+		// switch to profile
+		profileButton.addEventListener('click', function () {
+			window.location.href = 'html/profile-settings.html'
+		})
+	}
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-	initNavbar()
-	selectUnit()
 	foodSearchForm()
+	initAllModals()
+	setupEventListeners()
 })

@@ -9,7 +9,7 @@ body {
 	background-color: beige;
 }
 
-#nutrient-info-container {
+#food-log-container {
 	flex-direction: column;
 	align-items: flex-start;
 	width: 100%;
@@ -22,27 +22,12 @@ body {
 	color: #333;
 }
 
-#nutrient-info-container p,
-.btn,
-.input-field input[type='text'],
-.input-field input[type='number'],
-.input-field select {
-	max-width: 100%;
-}
-
-.form-container {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-}
-
 @media only screen and (max-width: 768px) {
 	.nav-content,
 	.sidenav-trigger,
 	.material-symbols-outlined,
 	.btn,
-	.input-field input,
-	.input-field select {
+	.input-field input {
 		font-size: 16px;
 	}
 

@@ -21,36 +21,16 @@
 		<title>Cal Pal</title>
 	</head>
 	<body>
-		<!-- Navbar with drop down menu -->
-
 		<nav class="nav-extended teal lighten-1">
 			<div class="nav-wrapper">
-				<!-- Redirect to homepage if user clicks logo -->
-				<a href="index.html" class="blue-text text-darken-4 left brand-logo"
-					>Cal Pal</a
-				>
-				<!--  Need to add badges in dropdown for notifications -->
+				<a class="blue-text text-darken-4 left brand-logo">Cal Pal</a>
 				<a href="#" data-target="mobile-demo" class="right sidenav-trigger"
 					><i class="blue-text text-darken-4 material-symbols-outlined"
 						>menu</i
 					></a
 				>
-				<!-- Change colors within html -->
-
 				<!-- Will hide navbar when screen is too small, visible on medium&large screens -->
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<!-- Create html file linking to foodlog and healthlog page -->
-					<li>
-						<a class="blue-text text-darken-4" href="html/food-log.html"
-							>Food Log</a
-						>
-					</li>
-					<li>
-						<a class="blue-text text-darken-4" href="html/health-log.html"
-							>Health Log</a
-						>
-					</li>
-
 					<li>
 						<!-- Trigger dropdown onclick for desktop -->
 						<a
@@ -71,24 +51,38 @@
 
 		<!-- Show dropdown options within menu -->
 		<ul id="dropdown-desktop" class="dropdown-content">
-			<li><a href="html/profile-settings.html">Profile & Settings</a></li>
-			<li><a href="html/notifications.html">Notifications</a></li>
+			<li>
+				<a href="html/profile-settings.html" id="profile-settings"
+					>Profile & Settings</a
+				>
+			</li>
+			<li><a href="html/food-log.html" id="food-log">Food Log</a></li>
+			<li>
+				<a
+					href="home"
+					id="home"
+					onclick="window.location.reload(); return false;"
+					>Home</a
+				>
+			</li>
 		</ul>
 
 		<!-- How sidenav will appear on mobile-->
 		<ul class="sidenav" id="mobile-demo">
 			<li><a href="html/food-log.html">Food Log</a></li>
-			<li><a href="html/health-log.html">Health Log</a></li>
 			<li><a href="html/profile-settings.html">Profile & Settings</a></li>
-			<li><a href="html/notifications.html">Notifications</a></li>
+			<li>
+				<a href="home" onclick="window.location.reload(); return false;"
+					>Home</a
+				>
+			</li>
 		</ul>
-
 		<!-- Post form to server -->
 		<div class="search-container">
 			<a
-				class="waves-effect waves-light button modal-trigger buttonOpen"
-				href="#search"
-				>Add Food</a
+				class="waves-effect waves-light btn modal-trigger btnOpen"
+				href="#search-modal"
+				>Search Food</a
 			>
 			<div id="search-modal" class="modal">
 				<div class="modal-content">
@@ -112,10 +106,11 @@
 						<!-- Unit Input -->
 						<div class="input-field">
 							<select id="unit" name="unit">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="grams">Grams</option>
-								<option value="ounces">Ounces</option>
-								<option value="servings">Servings</option>
+								<option value="" disabled selected>
+									Choose your measurement
+								</option>
+								<option value="gram">Grams</option>
+								<option value="ounce">Ounces</option>
 							</select>
 							<label for="unit">Unit:</label>
 						</div>
@@ -128,24 +123,30 @@
 				</div>
 			</div>
 			<a
-				href="#search"
-				class="modal-close waves-effect waves-green button-flat buttonClose"
-				>Close</a
-			>
+				href="#search-modal"
+				class="modal-close waves-effect waves-green btn-flat btnClose"
+			></a>
 		</div>
-
-		<div id="nutrient-info-container">
-			<p id="nutrient-label">Food Name:</p>
+		<!-- Initially hide nutrient info then dynamically show when clicked -->
+		<div id="nutrient-info-container" style="display: none">
+			<p id="nutrient-measurement-name">Food:</p>
 			<p id="nutrient-calories">Calories:</p>
 			<p id="nutrient-protein">Protein:</p>
 			<p id="nutrient-fat">Fat:</p>
 			<p id="nutrient-carbohydrates">Carbohydrates:</p>
-			<p id="nutrient-serving-size">Serving Size:</p>
+		</div>
+		<div id="add-food-container" style="display: none">
+			<button
+				id="add-food-btn"
+				class="btn waves-effect waves-light blue lighten-1"
+			>
+				Add Food
+			</button>
 		</div>
 		<footer class="footer">
 			<div id="edamam-badge" data-color="transparent"></div>
 		</footer>
 	</body>
-	<script src="script.js"></script>
+	<script src="script.js" defer></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>
